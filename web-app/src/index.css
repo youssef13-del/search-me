@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply min-w-[320px] bg-background text-foreground antialiased;
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(99, 102, 241, 0.08), transparent 28rem),
+      radial-gradient(circle at 90% 25%, rgba(168, 85, 247, 0.06), transparent 24rem);
+  }
+
+  ::selection {
+    @apply bg-primary/30;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+
+  .animate-fade-up {
+    animation: fade-up 550ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-fade-up-delay {
+    animation: fade-up 650ms 100ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .paper-card {
+    transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
+  }
+
+  .paper-card:hover {
+    @apply -translate-y-0.5 border-primary/30 shadow-xl shadow-primary/5;
+  }
+
+  .skeleton {
+    background: linear-gradient(90deg, hsl(var(--nextui-content2)) 25%, hsl(var(--nextui-content3)) 50%, hsl(var(--nextui-content2)) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  .status-dot {
+    @apply h-2 w-2 rounded-full bg-success;
+  }
+
+  .status-dot-pulse {
+    @apply bg-primary;
+    animation: pulse-soft 1.2s ease-in-out infinite;
+  }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  to { background-position: -200% 0; }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.45; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
